@@ -1,0 +1,40 @@
+MIT License
+
+Copyright (c) 2026 h3-video-guide contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## 关于本项目的示例角色
+
+教程与文档中出现的示例角色（README 里的「女主角 / 角色 A」）为 **Q 版鲸鱼娘**
+—— DeepSeek 的社区拟人形象，最早由 B 站创作者发布并开放二创，
+采用 **CC BY-NC-SA 4.0（非商业 + 相同方式共享）** 协议。
+
+- 本项目**只发布方法、提示词模板与脚本**，不附带任何角色立绘或成片素材。
+- 示例仅用于教学演示。使用者**请自行确认所用角色立绘的授权**，
+  或替换成自己拥有版权的角色（换图 + 改外貌清单即可，无需改其他内容）。
+- 商用成片前请务必阅读所用角色与各权重的原始许可文件。
+
+## 关于权重
+
+本项目不分发任何模型权重。底模、LoRA、VAE、文本编码器等遵循各自仓库的许可，
+部分权重有**地区排除条款**，且该限制可能延伸到**生成结果**。商用前请务必阅读原始许可文件。
+生成内容的版权归属遵循所用权重的许可条款。

@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+
+# 运行产物（临时）
+out/
+output/
+*.part
+prompt.txt
+*_raw.png
+*_api.json
+last_*.json
+
+# ⚠️ 注意：examples/ 下的 .mp4 是【案例成片】，会正常提交。
+# 只有根目录与 scripts/ 下跑出来的临时视频才需要手动排除。
+# 如果你不想把大视频推上去，请改用 Git LFS（见 PUBLISH.md）。
