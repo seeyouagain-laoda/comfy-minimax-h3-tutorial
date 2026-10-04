@@ -5,6 +5,52 @@
 
 ---
 
+## 🎬 先看成品
+
+下面这段视频是**本机真实跑出来的** —— 不是官方 demo，是按本教程流程从零做出来的第一支成片。
+
+**10 秒单段 / 864×480 / 243 帧 / 417 秒生成 / 提示词全文见 `examples/case-01-pudding/`**
+
+<https://github.com/seeyouagain-laoda/comfy-minimax-h3-tutorial/raw/main/examples/case-01-pudding/01_output_10s.mp4>
+
+<details>
+<summary>▶️ 点这里直接播放（无法内嵌视频时的备用入口）</summary>
+
+**成片文件**：`examples/case-01-pudding/01_output_10s.mp4`（1.8 MB，h264 + aac）
+**逐帧验收拼图**：
+
+![10 frames](examples/case-01-pudding/02_verify_10frames.jpg)
+
+**参考图 → 成片同帧对比**（左=送进模型的原始参考图，右=成片第 120 帧）：
+
+![compare](examples/case-01-pudding/04_compare_ref_vs_output.jpg)
+
+</details>
+
+### 这支片子验证了什么
+
+| 能力 | 结果 |
+|---|---|
+| 角色参考图锁保真 | ✅ 发型渐变 / 呆毛 / IV 发牌 / 围裙小蓝鲸 / 鲸尾，10 帧全部对上 |
+| 提示词六段式（Ref2VA） | ✅ 没有出现"大概像"的漂移 |
+| **快剪 1.5s/镜** | ✅ **原速播放即正常观感，不需要后期加速** |
+| 音画联合生成 | ✅ 自带 aac 双声道，台词与环境音同一次扩散生成 |
+| 8 步 turbo + 固定 seed | ✅ 10 秒片 417 秒出片 |
+| 纯道具镜不写角色 | ❌ **失效** —— 详见案例里的「实测不足」 |
+
+**它同样如实记录了 4 条没做到的地方**（纯道具镜角色消失、姿态不具体、呆毛小动作丢失、8 步语音偏糊），
+都在 [`examples/case-01-pudding/README.md`](examples/case-01-pudding/README.md)。
+
+### 全片速览
+
+![hero](docs/hero.png)
+
+**上半**：送进模型的原始参考图（2048×2048）。
+**下半**：成片的 4 个抽帧 —— 布丁特写 → 眼神特写 → 腮帮鼓鼓在吃 → 回头。
+发色、呆毛、发牌、围裙图案在四帧里都稳定。
+
+---
+
 ## ⚠️⚠️ 请先读这一段
 
 ### 1. 本教程的文档与代码，全部由 AI 生成
