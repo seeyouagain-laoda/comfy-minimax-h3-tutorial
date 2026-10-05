@@ -1,58 +1,61 @@
 # 日式魔法动漫打斗场景模板（H3 本机版）
 
 > 2026-10-02 落盘。来源：动画运动规律（Timing & Spacing / Anticipation / Impact Frame / Follow-Through 等通用原理）
-> + AI 打戏实测方法论（Seedance/Kling 系打戏控场法）+ 本机 H3 实测约束（16GB RAM、12 步、576×1024）。
-> 配套骨架：`references/battle-shot-skeleton.txt`（六段式可直接填）。
-> **核心一句话：一镜只做一个动作；打击感 = 蓄力保持 → 模糊挥出 → 冲击定帧；背景动糊、主体锐利。**
+>
+> - AI 打戏实测方法论（Seedance/Kling 系打戏控场法）+ 本机 H3 实测约束（16GB RAM、12 步、576×1024）。  
+>   配套骨架：`references/battle-shot-skeleton.txt`（六段式可直接填）。  
+>   **核心一句话：一镜只做一个动作；打击感 = 蓄力保持 → 模糊挥出 → 冲击定帧；背景动糊、主体锐利。**
+
+
 
 ---
 
 ## 0. 适用边界
 
-| 项 | 结论 |
-|---|---|
-| 能生成 | 单镜 5–6s 的打斗节拍（一次出拳 / 一次挥刀 / 一次对波 / 一次受击反应） |
-| 不能 | 三连击 combo、双方持续交互对打（H3 会糊成一团）→ **必须拆成多镜后期剪** |
-| 本机档位 | 竖版 576×1024 / 横版 768×576；步数 12；单镜 5–6s；同场戏固定 seed |
+| 项     | 结论                                                           |
+| ----- | ------------------------------------------------------------ |
+| 能生成   | 单镜 5–6s 的打斗节拍（一次出拳 / 一次挥刀 / 一次对波 / 一次受击反应）                   |
+| 不能    | 三连击 combo、双方持续交互对打（H3 会糊成一团）→ **必须拆成多镜后期剪**                  |
+| 本机档位  | 竖版 576×1024 / 横版 768×576；步数 12；单镜 5–6s；同场戏固定 seed            |
 | 角色一致性 | 只能靠 Ref2VA 参考图 + 逐字复用的不可变层（本机**没有角色 LoRA**，见 SKILL.md §5-10） |
 
-🔴 **最大误解**：写「激烈打斗 / 光影炸裂 / 热血沸腾」= 废话提示词，只会得到动作脱节 + 人物融化。
+🔴 **最大误解**：写「激烈打斗 / 光影炸裂 / 热血沸腾」= 废话提示词，只会得到动作脱节 + 人物融化。  
 AI 只认**功能型硬指令**（谁 → 做什么 → 打中谁 → 什么结果 → 镜头怎么动）。
 
 ---
 
 ## 1. AI 打戏五条硬铁律
 
-| # | 铁律 | 反例（会翻车） | 正例（写这句） |
-|---|---|---|---|
-| 1 | **一镜一个动作** | `punch then kick then dodge` | `one single punch thrust forward` |
-| 2 | **必须写镜头运动** | 只写动作 → 模型默认静态大远景，出来像监控画面 | `a fast whip pan following her thrust, motion blur on the swing, settling by 4.0s` |
-| 3 | **蓄力必须保持** | 直接挥 → 棉花拳 | `the wind-up held for a full half second, then one explosive release` |
-| 4 | **背景糊、主体锐** | 整体 motion blur → 人物脸糊 | `motion blur on background only` ★最有价值的一句 |
+| # | 铁律            | 反例（会翻车）                            | 正例（写这句）                                                                                |
+| - | ------------- | ---------------------------------- | -------------------------------------------------------------------------------------- |
+| 1 | **一镜一个动作**    | `punch then kick then dodge`       | `one single punch thrust forward`                                                      |
+| 2 | **必须写镜头运动**   | 只写动作 → 模型默认静态大远景，出来像监控画面           | `a fast whip pan following her thrust, motion blur on the swing, settling by 4.0s`     |
+| 3 | **蓄力必须保持**    | 直接挥 → 棉花拳                          | `the wind-up held for a full half second, then one explosive release`                  |
+| 4 | **背景糊、主体锐**   | 整体 motion blur → 人物脸糊              | `motion blur on background only` ★最有价值的一句                                              |
 | 5 | **武器/道具并入主体** | `a samurai with a katana` → 武器时有时无 | `a samurai gripping a katana in both hands` + `swinging the blade in a horizontal arc` |
 
 **附：复杂度降级**（AI 的稳定区很窄）：
 
-| 想要 | 写这个 | 别写 |
-|---|---|---|
-| 回旋踢 | `a fast roundhouse kick` | ❌ `an explosive spinning jumping kick`（morph 重灾区） |
-| 快动作 | `slow motion, 60fps rendered at 24fps`（给模型更多帧） | ❌ 直接加速 |
-| 极端动作 | 拆两镜：先只做蓄力，再只做击发 | ❌ 一镜塞完 |
+| 想要   | 写这个                                            | 别写                                                |
+| ---- | ---------------------------------------------- | ------------------------------------------------- |
+| 回旋踢  | `a fast roundhouse kick`                       | ❌ `an explosive spinning jumping kick`（morph 重灾区） |
+| 快动作  | `slow motion, 60fps rendered at 24fps`（给模型更多帧） | ❌ 直接加速                                            |
+| 极端动作 | 拆两镜：先只做蓄力，再只做击发                                | ❌ 一镜塞完                                            |
 
 ---
 
 ## 2. 动画八条基础原理（翻译成 AI 提示词）
 
-| 原理 | 干什么 | 提示词写法 |
-|---|---|---|
-| **Timing & Spacing** | 快招少帧、重击多帧 | `sharp quick spacing on the swing, tight spacing at impact` |
-| **Anticipation 蓄力** | 挥之前先往回拉 | `a held wind-up backwards, shoulders coiled` |
-| **Squash & Stretch** | 速度/冲击的形变夸张 | `her body stretching along the line of action, then squash on landing` |
-| **Staging 舞台调度** | 视线永远知道看哪儿 | 关键一击放画面中心 + `silhouette clarity, the attacker rim-lit against a bright window` |
-| **Follow-Through & Overlap 跟随/重叠** | 头发衣服比身体慢半拍 | `her hair and apron hem lagging behind the motion, settling a beat later` |
-| **Exaggeration 夸张** | 日式的飞出去/光刃拖尾 | `sent flying across the frame, a glowing slash trail arcing behind the blade` |
-| **Impact Frame 冲击帧** | 单帧高对比定格 | `a one-frame white impact flash at the contact point, black speed lines radiating` |
-| **Sound & 反应** | 听感卖重量 | `a low-frequency thud, the target recoiling and briefly frozen stiff` |
+| 原理                                 | 干什么         | 提示词写法                                                                              |
+| ---------------------------------- | ----------- | ---------------------------------------------------------------------------------- |
+| **Timing & Spacing**               | 快招少帧、重击多帧   | `sharp quick spacing on the swing, tight spacing at impact`                        |
+| **Anticipation 蓄力**                | 挥之前先往回拉     | `a held wind-up backwards, shoulders coiled`                                       |
+| **Squash & Stretch**               | 速度/冲击的形变夸张  | `her body stretching along the line of action, then squash on landing`             |
+| **Staging 舞台调度**                   | 视线永远知道看哪儿   | 关键一击放画面中心 + `silhouette clarity, the attacker rim-lit against a bright window`     |
+| **Follow-Through & Overlap 跟随/重叠** | 头发衣服比身体慢半拍  | `her hair and apron hem lagging behind the motion, settling a beat later`          |
+| **Exaggeration 夸张**                | 日式的飞出去/光刃拖尾 | `sent flying across the frame, a glowing slash trail arcing behind the blade`      |
+| **Impact Frame 冲击帧**               | 单帧高对比定格     | `a one-frame white impact flash at the contact point, black speed lines radiating` |
+| **Sound & 反应**                     | 听感卖重量       | `a low-frequency thud, the target recoiling and briefly frozen stiff`              |
 
 ---
 
@@ -106,25 +109,25 @@ silence for one beat, then the sound rushing back    (定格留白)
 
 ## 4. 四型预设（拆子模板，别用一套词打全部）
 
-| 型 | 重点 | 动作词 | 光效控制 | 镜数 |
-|---|---|---|---|---|
-| **近身格斗** | 接触反馈 + 肢体姿势 | `lunge, block, hook punch, recoil` | 少，靠汗/衣摆/灰尘 | 4–5 |
-| **兵器对抗** | 武器轨迹 + 重量感 | `gripping the katana in both hands, swinging the blade in a horizontal arc, a glowing slash trail` | 刃口高光 + 火花 | 5–6 |
-| **超能力对波** | 光效面积 + 表情 | `planting both palms, a held wind-up, one explosive release of a blue-magenta beam` | ★光效最猛，最易糊，控制面积 | 4–5 |
-| **追逐穿插** | 镜头移动 + 背景位移 | `sprinting, hair streaming back, background streaking past` | 靠环境光 | 4–6 |
+| 型         | 重点          | 动作词                                                                                                | 光效控制           | 镜数  |
+| --------- | ----------- | -------------------------------------------------------------------------------------------------- | -------------- | --- |
+| **近身格斗**  | 接触反馈 + 肢体姿势 | `lunge, block, hook punch, recoil`                                                                 | 少，靠汗/衣摆/灰尘     | 4–5 |
+| **兵器对抗**  | 武器轨迹 + 重量感  | `gripping the katana in both hands, swinging the blade in a horizontal arc, a glowing slash trail` | 刃口高光 + 火花      | 5–6 |
+| **超能力对波** | 光效面积 + 表情   | `planting both palms, a held wind-up, one explosive release of a blue-magenta beam`                | ★光效最猛，最易糊，控制面积 | 4–5 |
+| **追逐穿插**  | 镜头移动 + 背景位移 | `sprinting, hair streaming back, background streaking past`                                        | 靠环境光           | 4–6 |
 
 ---
 
 ## 5. 镜位表（6 镜 / 本机 H3 切法）
 
-| 镜 | 内容 | 相机 | 时长 | 关键句 |
-|---|---|---|---|---|
-| 1 | 建立：两人对峙、能量起势 | 广角固定、低机位 | 5s | `a static wide shot, both auras crackling` |
-| 2 | **蓄力保持** | 低角度仰拍 | 5s | `the wind-up held for a full half second` |
-| 3 | 挥出（whip pan + smear） | 横向摇镜追运动 | 5s | `a fast whip pan, motion blur on background only` |
-| 4 | **冲击定帧** | 特写锁死 + 速度线 | 5s | `a one-frame white impact flash, head snapping back` |
-| 5 | 反应（踉跄、衣摆乱飞） | 手提微晃 | 5s | `a handheld slight sway, apron hem lagging` |
-| 6 | 收招站定、能量收回 | 广角缓推 | 6s | `a slow push-in, her tail settling, the aura dimming` |
+| 镜 | 内容                   | 相机         | 时长 | 关键句                                                   |
+| - | -------------------- | ---------- | -- | ----------------------------------------------------- |
+| 1 | 建立：两人对峙、能量起势         | 广角固定、低机位   | 5s | `a static wide shot, both auras crackling`            |
+| 2 | **蓄力保持**             | 低角度仰拍      | 5s | `the wind-up held for a full half second`             |
+| 3 | 挥出（whip pan + smear） | 横向摇镜追运动    | 5s | `a fast whip pan, motion blur on background only`     |
+| 4 | **冲击定帧**             | 特写锁死 + 速度线 | 5s | `a one-frame white impact flash, head snapping back`  |
+| 5 | 反应（踉跄、衣摆乱飞）          | 手提微晃       | 5s | `a handheld slight sway, apron hem lagging`           |
+| 6 | 收招站定、能量收回            | 广角缓推       | 6s | `a slow push-in, her tail settling, the aura dimming` |
 
 🔴 **镜 4（冲击帧）结尾别停死**：让速度线还在扩张，才不会在镜 4→5 产生顿挫。
 
@@ -139,7 +142,7 @@ subject_definitions → summary → retention_analysis → detailed_description
 
 **六条填空规则**：
 
-1. `subject_definitions` 给**每张参考图一个独立段落**，段首字段名重复写（H3 吃这个）；
+1. `subject_definitions` 给**每张参考图一个独立段落**，段首字段名重复写（H3 吃这个）；  
    每张图必须写「appearance anchor 职责 + 逐项复刻清单 + is not a frame of the target video」。
 2. `summary` 用 `[reference generation]` 开头，一句话点明「本片是几秒的什么戏、三镜各干什么」。
 3. `retention_analysis` 逐图逐镜列 `fully_preserved` 清单。
@@ -147,10 +150,10 @@ subject_definitions → summary → retention_analysis → detailed_description
 5. `overall_soundscape` 只放贯穿全片的底噪（风声/魔法余鸣/环境）。
 6. `non_diegetic_music` 给时间轴：紧张鼓点 → 蓄力定音 → 击发爆点 → 收尾一响。
 
-**🔴 风格锚点每 2–3 行插一次**（模型约每 10 帧重评风格，不插就漂回写实）：
+**🔴 风格锚点每 2–3 行插一次**（模型约每 10 帧重评风格，不插就漂回写实）：  
 把 `cel-shaded, flat shading, bold outlines, no 3D rendering` 这句**在 detailed_description 里至少重写两遍**。
 
-**🔴 负向收尾**：每镜末尾加
+**🔴 负向收尾**：每镜末尾加  
 `no speckles, no spots, no bubbles, no blobs, no floating artifacts.`
 
 **🔴 反融合**：参考图段落里写死 `only one girl may be visible in the frame`，防把设定图的多视图排版画进画面。
@@ -161,11 +164,11 @@ subject_definitions → summary → retention_analysis → detailed_description
 
 ## 7. 本机参数配方
 
-| 场景 | 参数 | 耗时 |
-|---|---|---|
-| 打斗试片（验证动作语言） | `--duration 3 --steps 8 --w 384 --h 640 --seed 42` | ~45s |
+| 场景             | 参数                                                                  | 耗时      |
+| -------------- | ------------------------------------------------------------------- | ------- |
+| 打斗试片（验证动作语言）   | `--duration 3 --steps 8 --w 384 --h 640 --seed 42`                  | ~45s    |
 | **单镜正式打斗（推荐）** | `--duration 5 --steps 12 --w 576 --h 1024 --seed 42 --ref-size max` | ~15 min |
-| 长镜（收招 / 对峙） | `--duration 6 --steps 12 --w 576 --h 1024` | ~18 min |
+| 长镜（收招 / 对峙）    | `--duration 6 --steps 12 --w 576 --h 1024`                          | ~18 min |
 
 - 同场戏**不换 seed**（换场才换）；失败重跑先 +1 seed。
 - 打斗戏**别上 8 步**（斑点重灾区）；12 步起步。
@@ -179,7 +182,7 @@ subject_definitions → summary → retention_analysis → detailed_description
 
 按 SKILL.md §「多段连贯性」执行，打戏额外加两条：
 
-1. **末帧别取最后帧**：生成器尾段 10–15% 已把镜头摇停，拿它做种子 → 下镜从静止起步 = 接缝一顿。
+1. **末帧别取最后帧**：生成器尾段 10–15% 已把镜头摇停，拿它做种子 → 下镜从静止起步 = 接缝一顿。  
    → 每段多生成 20–30%，回退到「运动还没减速」那一帧当 `--ref`。
 2. **运动方向必须写反**：A 镜结尾 `镜头快速右摇` → B 镜开头 `从右摇减速、模糊收敛`。推近配推远。
 3. 每 3–4 镜重锚一张新静帧（artifact 会累积下传）。
@@ -215,6 +218,8 @@ A cool night courtyard ambience: wind through shrine trees, distant lantern crea
 non_diegetic_music:
 A tense taiko-and-string cue from 00.000, one held drum hit at 01.900, an explosive hit at 02.000, and one ringing low tail ending at 06.000.
 ```
+
+
 
 ---
 
@@ -458,6 +463,7 @@ initial blast subsides into drifting smoke and falling debris.
 ### 14.3 「一镜一动作」对 Ref2VA 不适用（推翻本模板 §1）
 实测：成片级提示词恰恰是 `one uninterrupted cinematic sequence` 的**持续升级事件链**才出效果。
 单一动作 + Ref2VA = 复刻态空转。§1 铁律在 Ref2VA 续接段请改用 §14.1 的事件链写法。
+
 
 ### 14.4 本机天花板：静帧动画（9 段全部如此，含 15s 长片与抄的原文）
 - 能做到：画面精美（建筑/法阵/火焰/人物一致性都好）
@@ -744,6 +750,7 @@ Image 2 defines the location: <场景清单>. Keep the location exactly as in Im
 `MiniMaxH3ImageToVideo` 但**只传 clip/vae/prompt/width/height/length，
 `first_frame` 与 `last_frame` 两个可选输入留空 = 退化成纯 T2VA**。
 
+
 官方工作流 `1-Aiden-minimax文-图-首尾帧生视频` 里这两个位是 `link=64` / `link=70` **都接上的**。
 
 | 真正能让画面动起来的三个能力 | 本机此前 |
@@ -1008,6 +1015,7 @@ NOT real skin texture, NOT depth of field bokeh, NOT film grain
 | 18:21 (5s) | LoRA `studio1939-strong` 0.7 | 1939 古早水粉 |
 | 19:06 (2s) | `hand-painted watercolor background` + `vivid palette` | 2000 年代初 TV 动画 |
 | **19:15 (2s)** | **`muted low-saturation palette` + `soft multi-step gradients` + 三个动作 LoRA** | ✅ **芙莉莲级，成了** |
+
 
 ### 根因不是措辞，是我**对"现代主流画风"的理解本身有偏差**
 我一直以为「现代 = 厚涂水彩」——那是 **2000 年代末～2010 年代初**（京阿尼/轻音系）。

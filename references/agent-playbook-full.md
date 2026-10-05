@@ -419,7 +419,7 @@ T2VA 用三字段：`integrated_multimodal_description` / `overall_soundscape` /
 → **任何新角色出视频前，先另行生图拿到锚图**，用 `gemini-image-gen` skill：
 
 ```bash
-"<PYTHON>" "<AGENT_SKILL_DIR>\gen_image.py" "<英文角色描述>" --size 1024x1792 --quality standard --host http://192.168.31.123:8045
+"<PYTHON>" "<AGENT_SKILL_DIR>\gen_image.py" "<英文角色描述>" --size 1024x1792 --quality standard --host http://<NAS_IP>:8045
 ```
 - 出图后转 PNG 存 `<ASSET_DIR>\<角色>_锚图.png`，直接喂 H3 的 `--ref`（节点永不放大参考图，源图短边 ≥768 够用）。
 - 🔑 401 / `token_rejected` **不是 key 坏了，是拿错了 key**：文档（`重要AI配置文档`）里转录的 `sk-123456789` 是旧值，
