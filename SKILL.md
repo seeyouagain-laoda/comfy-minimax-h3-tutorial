@@ -25,6 +25,11 @@ description: 基于 Comfy 和 MiniMax H3 的实战教程（以 DeepSeek 鲸鱼�
 | **写出「不慢」的节奏** | **`references/shot-rhythm.md`** |
 | **抄现成模板** | **`references/prompt-templates.md`** |
 | **出片不对** | ⭐ **`references/troubleshooting.md`**（五步排查 + 静默失效家族 + 决策树） |
+| **要 Agent 全自动跑（多段/双角色/接续链/二采）** | 🔴 **`references/agent-playbook-full.md`**（1860 行完整作战手册：12 步流程 + 27 条避坑） |
+| **写日式异世界/魔法打斗** | 🔴 **`references/battle-anime-template.md`**（五铁律 + 打击感词库 + 四型预设） |
+| **要每步的验收判据** | **`references/pipeline-checklist.md`** |
+| **画风总出成照片级写实** | **`references/prompt-mastery.md`**（必须分层写） |
+| **查官方提示词格式原文** | **`references/base-en.txt`** / **`references/ref-en.txt`** |
 
 ## 0.1 上手路线（AI Agent 必读）
 
@@ -201,6 +206,22 @@ python scripts/make_ref.py --src three_view.png --out ref_charA
 | `references/workflow-params.md` | ⭐ 节点级参数 + 分辨率对照 + 步数选择 + 底模/LoRA/节点包关系 |
 | `references/prompt-templates.md` | 提示词模板（单/双角色/日式/打斗） |
 | `references/shot-rhythm.md` | 快剪分镜表模板 + 完整示例 |
+| `references/agent-playbook-full.md` | ⭐⭐ **Agent 完整作战手册**（1860 行）：12 步端到端流程 + 27 条避坑清单 + 静默失效家族 |
+| `references/battle-anime-template.md` | ⭐⭐ 日式异世界/魔法打斗提示词库（五铁律 + 打击感词库 + 四型预设 + 镜位表） |
+| `references/pipeline-checklist.md` | ⭐ 端到端 pipeline 每步验收判据 |
+| `references/prompt-mastery.md` | 提示词分层写法（画风类需求必读） |
+| `references/base-en.txt` / `ref-en.txt` | 官方提示词格式权威参考（原文） |
+| `references/train-sill-template.md` | 训练类项目模板写法 |
+| `references/example-fastcut-duo.md` | 快剪分镜实战示例 |
+| `references/example-ref2va.txt` | Ref2VA 单段实战示例 |
+| `references/example-shenshen-comedy.txt` | 灾难喜剧节奏实战示例 |
+| `references/battle-shot-skeleton.txt` | 打斗分镜骨架 |
+| `scripts/h3_ep_*.py` | 分集 runner（2clip 接续链/快剪/双角色/15s 单段） |
+| `scripts/h3_motion_context_chain.py` | Motion Context 多段接续（可接 3 段参考视频） |
+| `scripts/h3_latent_upscale.py` | Latent 放大二采 |
+| `scripts/h3_story.py` | 分镜脚本 → 提示词生成 |
+| `scripts/h3_ep_bowl_duo.py` | 双角色同框实战例|
+| `scripts/h3_model_ab.py` | 底模 A/B 对拍 |
 
 ---
 

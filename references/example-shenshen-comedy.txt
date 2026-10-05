@@ -1,0 +1,26 @@
+Ref2VA 六段式 · 深深（DeepSeek 鲸鱼娘）《偷懒现行》10s（2026-10-02）
+配套：--ref "<ASSET_DIR>\charA_front_2048.png" --duration 10 --steps 12 --w 384 --h 640 --seed 7
+（参考图 = 桌面现成的深深正面设定图，无需新出图；台词两处开口 + 两处画外音；段名顺序不可改）
+=================================================================
+
+subject_definitions:
+<Picture 1> is a full-body front-view reference portrait of the chibi anime whale girl named Shen-Shen: two-head-tall chibi proportions, very long wavy hair in a deep-blue to light-blue gradient with one big curled ahoge on top, a white frilled maid headdress, a blue "IV" roman-numeral hair clip on her fringe, a small side ponytail tied with a blue bow and a tiny whale-tail hair ornament, whale fin ears on both sides of her head, large round blue eyes, a navy blue long-sleeved maid dress with gold-trim embroidery and white frilled cuffs, a white frilled apron with a little blue whale print on the pocket, a dark blue neck bow with a blue gemstone brooch, sparkling blue whale tail fins with star speckles at her side, white socks and black mary-jane shoes. She serves [Shot 1] [Shot 2] [Shot 3] as an appearance anchor: her chibi proportions, facial identity, gradient blue hair with ahoge, maid headdress, "IV" hair clip, whale fin ears, navy maid dress, whale-print apron and starry blue whale tail must be reproduced exactly. <Picture 1> is not a frame of the target video; its portrait layout must not appear on screen, and only one girl may be visible in the frame.
+
+summary:
+[reference generation] The target video is one continuous 10-second comedic slice-of-life scene: the chibi whale girl from <Picture 1> is caught lazing on the sofa gaming, springs upright to hide her snacks behind her back while her own whale tail sweeps the evidence into the sofa gap, declares a tsundere excuse to the camera, then defends her third bowl of rice with stuffed cheeks. <Picture 1> supplies her appearance only; her identity, hairstyle, outfit and starry whale tail are preserved, while her poses, the living-room environment, the camera work and all sound are newly generated.
+
+retention_analysis:
+<Picture 1> ([Shot 1] [Shot 2] [Shot 3] appearance anchor): fully_preserved - chibi two-head-tall proportions, gradient blue long hair with big curled ahoge, white frilled maid headdress, blue "IV" hair clip, whale fin ears, large round blue eyes, navy blue long-sleeved maid dress with gold-trim embroidery, white frilled apron with the little blue whale print, dark blue neck bow with gemstone brooch, and the sparkling starry blue whale tail are all reproduced; only her poses and actions, the living room, the camera movement and all audio are newly generated.
+
+detailed_description:
+[Shot 1] A warm sunlit Japanese-style living room in the early afternoon: soft daylight through sheer curtains, a low fabric sofa sized for her chibi body, a TV glowing softly on the wall, empty snack bags scattered on the floor. The chibi whale girl from <Picture 1> lies sprawled bonelessly across the sofa, thumbing a handheld game console almost as big as her torso, her starry blue whale tail swaying lazily above the armrest like a slow metronome. Sound inline: 0.00-3.50s soft game bleeps and button clicks near her hands; 0.00-3.50s faint TV jingle from the wall set. At 02.800 an off-screen master's voice says in an off-screen voiceover, "小深，作业写完了吗？" while his lips remain completely closed; the game bleeps stop abruptly at 03.200 and her round blue eyes widen. Camera: static wide shot at eye level, gentle focus held on her.
+
+[Shot 2] Fast push-in from wide to medium on her. At 03.600 she springs upright in one bounce, cramming the chip bag behind her back with her left hand, while her whale tail moves on its own and sweeps two snack bags into the sofa gap between 04.000 and 04.800. She puffs her round cheeks, stares at the camera and declares with clear lip movement, <d>[Chinese] 深、深深才没有偷懒！这是反应力特训！</d> Sound inline: 3.60-4.00s one quick fabric rustle; 4.20s a soft tail thump on the sofa; 4.60-6.80s her bright tsundere female voice in standard Mandarin with a comedic sting note under it.
+
+[Shot 3] Medium close shot at the low table. At 07.000 she now sits properly at the table, hugging a big rice bowl in both arms and eating in big bites, cheeks stuffed round; her tail-tip pats the sofa twice, smug and slow. At 08.000 she mumbles with a full mouth, <d>[Chinese] 吃米饭是为了长肌肉…才、才不是胖！</d> At 09.000 the off-screen master's voice says in an off-screen voiceover, "哦——那第三碗呢？" while his lips remain completely closed; she freezes mid-bite at 09.300, eyes darting sideways, tail-tip frozen in the air. Sound inline: 7.00-9.00s soft rice-bowl clinks and munching; 9.00-9.30s the calm male voice line; 9.30-10.00s a tiny comedic pause with room tone only.
+
+overall_soundscape:
+A warm afternoon apartment room tone: faint TV murmur from the wall, distant street ambience through the window, playful comedic timing underneath; a cute slightly high female voice in standard Mandarin for her lines, a calm male voice for the off-screen lines.
+
+non_diegetic_music:
+A light playful pizzicato string cue enters at 00.500, bounces along until 06.800, ducks out for the rice-bowl gag, and returns for one soft final note ending at 10.000.

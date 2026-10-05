@@ -1,0 +1,25 @@
+subject_definitions:
+<Picture 1> is a full-body front-view reference portrait of the chibi anime whale girl named Shen-Shen: two-head-tall chibi proportions, very long wavy hair in a deep-blue to light-blue gradient with one big curled ahoge on top, a white frilled maid headdress, a blue "IV" roman-numeral hair clip on her fringe, a small side ponytail tied with a blue bow and a tiny whale-tail hair ornament, whale fin ears on both sides of her head, large round blue eyes, a navy blue long-sleeved maid dress with gold-trim embroidery and white frilled cuffs, a white frilled apron with a little blue whale print on the pocket, a dark blue neck bow with a blue gemstone brooch, sparkling blue whale tail fins with star speckles at her side, white socks and black mary-jane shoes. <Picture 1> serves [Shot 1] [Shot 2] [Shot 3] as an appearance anchor: her chibi proportions, facial identity, gradient blue hair with ahoge, maid headdress, "IV" hair clip, whale fin ears, navy maid dress, whale-print apron and starry blue whale tail must be reproduced exactly. <Picture 1> is not a frame of the target video; its portrait layout must not appear on screen, and only one girl may be visible in the frame.
+
+subject_definitions:
+FILL: <Picture 2> is the enemy silhouette in this battle, full-body front view, FILL enemy outfit and weapon description. <Picture 2> serves [Shot 2] [Shot 3] as an appearance anchor: FILL. <Picture 2> is not a frame of the target video; its portrait layout must not appear on screen.
+
+summary:
+[reference generation] The target video is one continuous FILL (6) second stylized anime magic battle: FILL one action per shot only, shot 1 establishes the clash, shot 2 is the wind-up hold followed by one explosive release, shot 3 is the held impact frame and reaction. FILL. <Picture 1> supplies Shen-Shen's appearance only; <Picture 2> supplies the enemy's appearance only; their identities, hairstyles, outfits, weapon silhouettes and lighting direction are preserved, while their poses, the environment, the camera work and all sound are newly generated.
+
+retention_analysis:
+<Picture 1> ([Shot 1] [Shot 2] [Shot 3] appearance anchor): fully_preserved - chibi two-head-tall proportions, gradient blue long hair with big curled ahoge, white frilled maid headdress, blue "IV" hair clip, whale fin ears, large round blue eyes, navy blue long-sleeved maid dress with gold-trim embroidery, white frilled apron with the little blue whale print, dark blue neck bow with gemstone brooch, and the sparkling starry blue whale tail are all reproduced; only her poses and actions, the camera movement and all audio are newly generated.
+<Picture 2> ([Shot 2] [Shot 3] appearance anchor): fully_preserved - FILL; only poses, camera movement and audio are newly generated.
+
+detailed_description:
+[Shot 1] FILL environment, hard rim light from behind, cel-shaded anime style, flat two-tone shadows, bold ink outlines, a violet night palette with warm magesium glow. The chibi whale girl from <Picture 1> stands FILL pose, the enemy from <Picture 2> FILL, both energy auras crackling. FILL. Sound inline: 0.00-FILL seconds FILL; 0.00-FILL seconds FILL. Camera: a static wide shot at FILL, focus held on them.
+
+[Shot 2] At FILL a quick push-in. She plants FILL, a glowing FILL aura cracking around her whale tail, the wind-up held for a full half second, then one explosive release with a fast motion smear and energy sparks scattering past the camera. FILL. Sound inline: FILL; FILL; FILL. Camera: FILL.
+
+[Shot 3] At FILL the shot holds on the impact frame. FILL. FILL. Sound inline: FILL; FILL; FILL. Camera: FILL.
+
+overall_soundscape:
+FILL room/field tone with ambient magic crackle and wind; a cute slightly high female voice in standard Mandarin for Shen-Shen's line, a FILL voice for the enemy's off-screen line.
+
+non_diegetic_music:
+A tense taiko-and-string cue with a held drum hit at the wind-up, an explosive hit at the impact, and one ringing tail ending at FILL.

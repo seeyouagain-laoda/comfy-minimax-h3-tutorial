@@ -1,0 +1,23 @@
+Ref2VA 六段式真实样例（本机跑通，2026-10-01）
+配套：--ref "<ASSET_DIR>\charB_front_2048.png" --duration 5 --steps 10 --w 768 --h 576 --seed 42
+产物：ComfyStudio_H3_00003_.mp4，h264 768x576 24.01fps 124 帧 5.165s + aac 32kHz 立体声
+注意：段名顺序不可改；全文只用 <Picture N>；声音内联进镜头；这是「参考图当外观锚点」的标准写法。
+=================================================================
+
+subject_definitions:
+<Picture 1> is a full-body front-view portrait of the anime girl named Shizuka: short black bobbed hair with straight bangs, a slim red hairband, a white short-sleeved collared shirt, a blue pleated skirt, white socks and brown shoes, standing against a plain background. It serves [Shot 1] only as an appearance anchor: her facial identity, black bob hairstyle with straight bangs, red hairband, white shirt and blue pleated skirt must be reproduced exactly. <Picture 1> is not a frame of the target video; its portrait layout must not appear on screen, and only one girl may be visible in the frame.
+
+summary:
+[reference generation] The target video is one continuous 5-second shot following the girl from <Picture 1> as she walks slowly along a sunlit school corridor after class, glancing sideways toward a window, then turning her gaze back forward with a small closed-mouth smile. <Picture 1> supplies her appearance only; her identity, hairstyle, red hairband, white shirt and pleated skirt are preserved, while her motion, the corridor environment, the camera movement, and all sound are newly generated.
+
+retention_analysis:
+<Picture 1> ([Shot 1] appearance anchor): fully_preserved - black bob hair with straight bangs, red hairband, facial features, white short-sleeved collared shirt, blue pleated skirt and white socks are all reproduced; only her pose, her walking motion and the surrounding corridor are newly generated.
+
+detailed_description:
+[Shot 1] A sunlit school corridor in the late afternoon: warm golden daylight streams through tall windows on the left, rows of closed classroom doors and a polished wooden floor recede into soft depth behind her. The girl from <Picture 1> walks slowly forward from the middle of the frame toward the camera at a steady pace, shoulders relaxed, holding a light blue book loosely against her chest with both hands. Sound inline: 0.00-5.00s the soft continuous tap of her shoes on the wooden floor, slightly left of center; 0.00-5.00s faint distant student chatter and one door latch click from behind her. At 01.500 she turns her head to the left toward the window and lifts her chin slightly as daylight crosses her cheeks; sound: 1.50-3.00s light fabric rustle as she shifts the book in her hands. At 03.000 she turns her gaze back to the camera and a small closed-mouth smile appears, then she keeps walking and passes just to the right of the lens at 05.000. Camera: handheld medium shot at eye level, tracking backward in front of her with small amplitude at slow speed, focus held on her face for the entire take. No dialogue.
+
+overall_soundscape:
+A quiet late-afternoon corridor ambience: reverberant wooden footsteps, muffled distant voices, occasional door latch clicks, and a light outdoor breeze drifting through the open windows.
+
+non_diegetic_music:
+A gentle solo piano piece in a warm major key enters at 00.800, sustains as soft single notes, and fades out completely by 05.000.
