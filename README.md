@@ -5,6 +5,73 @@
 
 ---
 
+## 🧰 软硬件与链接总清单（本项目用到的一切）
+
+> 下面把**从零跑通本教程**需要的硬件、软件、模型权重、AI 工具链，以及它们的**链接和用途**
+> 一次性列清楚。每一项都标明「它是干嘛用的」。详细安装步骤见 §1–§3，模型下载直链见 `references/models.md`。
+
+### 🔧 一、硬件（本地推理跑在什么上）
+
+| 部件 | 本项目用的 / 最低要求 | 它是干嘛用的 |
+|---|---|---|
+| **GPU（显卡）** | NVIDIA RTX 5060 Ti **16 GB**（实测）；最低 12 GB | **核心算力**：H3 视频扩散模型在显卡上跑，显存决定能开多大分辨率、要不要降画质 |
+| **显存类型** | GDDR6 / GDDR6X / GDDR7 均可 | 只是带宽差异，够用即可 |
+| **系统内存** | 16 GB（实测）/ 推荐 32 GB | 视频 VAE 解码、参考图编码时吃内存，不够会爆 |
+| **硬盘** | 60 GB 空闲（实测）；全量权重 ≈ 57 GB | 存放底模 19.5GB×2 + 文本编码器 14.6GB + VAE/LoRA/放大权重 |
+| **CUDA 驱动** | 支持 CUDA 的 N 卡驱动 | 让 PyTorch 能调用显卡；没有它跑不了本地推理 |
+| **FFmpeg** | 任意较新版本（系统 PATH 可用） | **后期处理**：把多段视频拼接成全片、裁剪开头杂帧、混音、转码（见 §9、长片实战） |
+
+### 💻 二、软件与运行时（代码跑在什么上）
+
+| 组件 | 版本 / 来源 | 链接 | 它是干嘛用的 |
+|---|---|---|---|
+| **ComfyUI** | ≥ 0.34.0（节点内置 H3） | <https://github.com/comfyanonymous/ComfyUI> | **生成引擎宿主**：H3 是 ComfyUI 内置节点（`partner/video/MiniMax`），本机在 `http://127.0.0.1:8777` 或 `:8188` 跑图 |
+| **PyTorch + CUDA** | 2.12.1+cu130（实测） | 随 ComfyUI 依赖安装 | **深度学习框架**：实际执行模型前向计算，调度显卡 |
+| **Python** | 3.11 / 3.13 | <https://www.python.org/> | 跑本仓库所有脚本（`h3_story.py`、`download_hf.py`、`install_nodes.sh` 等） |
+| **FFmpeg** | 系统安装 | <https://ffmpeg.org/> | 见上「硬件」条，视频拼接/裁剪/转码命令行工具 |
+| **Git** | 任意版本 | <https://git-scm.com/> | 克隆 ComfyUI、节点包，以及本教程仓库本身 |
+
+### 🤖 三、AI / Agent 工具链（谁在编排这条流水线）
+
+| 组件 | 用途 | 链接 |
+|---|---|---|
+| **WorkBuddy（AI Agent 客户端）** | **总指挥**：读脚本、写提示词、调 ComfyUI、跑拼接、做质检——本教程所有文档/脚本都由它生成并实跑验证 | <https://www.workbuddy.cn/> |
+| **本仓库 `scripts/` 脚本** | Agent 落地执行的工具：`h3_story.py`（分镜/批次编排）、`h3_ep_fastcut_duo.py`（双角色快剪）、`download_hf.py`（权重下载）、`install_nodes.sh`（节点包安装） | 见仓库 `scripts/` |
+| **llama.cpp（本地大模型）** | **写剧本/聊天**：用 Qwen3.8-27B 一类本地模型生成分镜台词、辅助续写剧情（非生成视频，纯文本） | <https://github.com/ggml-org/llama.cpp> |
+| **GPT-SoVITS（可选配音）** | **角色配音**：把剧本文本合成角色音色语音，用于长片对白（H3 原生音频偏糊，对白建议后期配音） | <https://github.com/RVC-Boss/GPT-SoVITS> |
+
+### 🧠 四、模型权重（生成视频的"大脑"，本项目不分发，只给清单）
+
+> 完整清单 + 直链 + 选型理由见 **`references/models.md`**。下面是总览：
+
+| 权重 | 体积 | 它是干嘛用的 | 下载地址 |
+|---|---|---|---|
+| `minimax_h3_fl2va_pruned_int8_convrot` | 19.5 GB | **首帧/纯文字通道底模**：从一张图或纯提示词生成视频 | <https://huggingface.co/Comfy-Org/MiniMax-H3> |
+| `minimax_h3_ref2va_pruned_int8_convrot` | 19.5 GB | **多参考图通道底模**：锁角色外貌（双角色/第三人不串脸用它） | 同上 |
+| `qwen3vl_32b_minimax_h3_nvfp4_awq` | 14.6 GB | **文本编码器**：把提示词+参考图编码成模型能懂的条件 | 同上 |
+| `minimax_h3_video_vae` / `audio_vae` | 各 0.3 GB | **视频/音频解码器**：latent↔像素、latent↔声音 | 同上 |
+| `minimax_h3_fl2v_turbo_8step` LoRA | 1.8 GB | **加速 LoRA**：把步数从 25 降到 8，出片快 3 倍 | 同上（仓库 `loras/`） |
+| `minimax_h3_latent_upscaler_3d` | 0.64 GB | **二采放大**：把 0.4MP 提到 1MP+（路线 B） | <https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler> |
+| 融合底模（可选） | ~11.7 GB | 一份权重通吃两条通道，省 19.5 GB | <https://huggingface.co/jfar-z/MiniMax-H3-FL2VA-Ref2VA-Hybrid-NVFP4> |
+
+> 🔴 **本仓库不托管任何模型权重**，全部从上面官方/社区仓库自行下载。
+
+### 🔗 五、相关链接汇总
+
+| 链接 | 是什么 |
+|---|---|
+| <https://github.com/seeyouagain-laoda/comfy-minimax-h3-tutorial> | **本教程仓库**（你正在看的这个） |
+| <https://github.com/comfyanonymous/ComfyUI> | ComfyUI 生成引擎 |
+| <https://huggingface.co/Comfy-Org/MiniMax-H3> | H3 官方权重（底模/编码器/VAE/LoRA） |
+| <https://huggingface.co/LBH-123-AI/Minimax_h3_latent_Upscaler> | 二采放大权重 |
+| <https://huggingface.co/jfar-z/MiniMax-H3-FL2VA-Ref2VA-Hybrid-NVFP4> | 融合底模（可选） |
+| <https://github.com/ggml-org/llama.cpp> | 本地大模型（写剧本/聊天） |
+| <https://github.com/RVC-Boss/GPT-SoVITS> | 角色配音（可选） |
+| <https://www.workbuddy.cn/> | AI Agent 客户端（本教程的编排者） |
+| 案例成片（仓库内） | `examples/case-01-pudding/01_output_10s.mp4` |
+
+---
+
 ## 🎬 先看成品
 
 下面这段视频是**本机真实跑出来的** —— 不是官方 demo，是按本教程流程从零做出来的第一支成片。
@@ -93,6 +160,7 @@
 
 | 章节 | 内容 |
 |---|---|
+| **🧰 软硬件与链接总清单** | ⭐ **本项目用到的所有硬件/软件/模型/AI 工具 + 链接 + 各自用途**（开头集中说明） |
 | **§0.5** | 三条上手路线（选一条开始） |
 | **§1 – §3** | 硬件 / 软件 / 安装 |
 | **`references/models.md`** | ⭐ **模型清单 · 下载地址 · 选型理由** |
