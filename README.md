@@ -118,6 +118,36 @@
 
 ---
 
+## 🎬 案例 02 · 20 秒两段接续（接缝看不出来的那种）
+
+第二支成片，验证的是**多段接续** —— 20 秒 = 2 段 × 10 秒，**Motion Context latent 级真接续**。
+
+**20 秒 / 864×480 / 464 帧 / 861 秒生成 / 提示词全文见 `examples/case-02-sword/`**
+
+<https://github.com/seeyouagain-laoda/comfy-minimax-h3-tutorial/raw/main/examples/case-02-sword/01_output_20s.mp4>
+
+**全片 20 帧验收拼图**：
+
+![20 frames](examples/case-02-sword/02_verify_20frames.jpg)
+
+**🔴 接缝 14 帧检查**（接缝前后各 7 帧）—— 同一姿势、同一光位、同一把木剑、同一袋掉在地上的零食，**无跳切、无第三人、无色偏**：
+
+![seam](examples/case-02-sword/05_seam_check_14frames.jpg)
+
+| 能力 | 结果 |
+|---|---|
+| **Motion Context latent 接续** | ✅ 接缝 14 帧连贯（不是末帧续接，没有 decode 抖动） |
+| **Trim 帧数核算** | ✅ 第 2 段实际交付 `243 − 22 = 221` 帧，成片 `243 + 221 = 464` 帧 |
+| **第 2 段开头复述上段结尾** | ✅ 这是接缝成功的**直接原因**（姿势/光位/道具逐项复述，变化点推到 1.6s 后） |
+| **接缝落在静止点** | ✅ 「剑风掀飞零食袋 → 呆住」，两段都定格，钉帧最友好 |
+| **道具不进公共段** | ✅ 零食袋只在具体镜写，角色 20 帧全程在画内（案例 01 踩过的坑） |
+| **底模通道配对** | ⚠️ 社区工作流默认挂 fl2va，r2v 必须换 ref2va 权重（详见案例 §7 第 1 条） |
+
+**它同样如实记录了 5 条没做到的地方**（底模通道易配错、零食袋偏小、木剑剪影偏细长、8 步语音偏糊、接续段自由度偏低），
+都在 [`examples/case-02-sword/README.md`](examples/case-02-sword/README.md)。
+
+---
+
 ## ⚠️⚠️ 请先读这一段
 
 ### 1. 本教程的文档与代码，全部由 AI 生成
@@ -169,6 +199,7 @@
 | **`references/workflow-params.md`** | ⭐ 节点级参数手册 |
 | **`references/shot-rhythm.md`** | ⭐ 分镜节奏标准（解决"看起来像慢动作"） |
 | **`examples/case-01-pudding/`** | ⭐ **完整案例**：成片 + 原始参考图 + 提示词全文 + 验收流程 + 实测不足 |
+| **`examples/case-02-sword/`** | ⭐⭐ **20 秒两段接续案例**：Motion Context latent 接续 + Trim 帧数核算 + 接缝检查 + 完整 runner 脚本 |
 | **`references/troubleshooting.md`** | 出片不对时查这一页 |
 | **`references/agent-playbook-full.md`** | ⭐⭐ **Agent 完整作战手册**（约 1860 行）：12步端到端流程 + 27 条避坑 + 日式异世界战斗提示词库 |
 | **`references/battle-anime-template.md`** | ⭐⭐ 日式异世界/魔法打斗**五铁律 + 打击感词库 + 四型预设 + 镜位表** ⚠️ **实测效果差，不建议使用** |
@@ -294,6 +325,7 @@ MiniMax-H3 是目前开源视频模型里**少数能在一张消费级显卡上�
 | 写出「不慢」的节奏 | **`references/shot-rhythm.md`**（分镜硬指标 + 完整分镜示例） |
 | 抄现成模板 | **`references/prompt-templates.md`** |
 | **看一个完整案例** | ⭐ **`examples/case-01-pudding/README.md`**（成片 + 原始参考图 + 提示词全文 + 验收流程 + 实测不足） |
+| **学两段接续怎么做** | ⭐⭐ **`examples/case-02-sword/README.md`**（20 秒 = 2×10s、Motion Context、Trim 帧数、接缝检查、可直接跑的 runner） |
 | 出片不对 | ⭐ **`references/troubleshooting.md`**（一页速查：静默失效 / 画质 / 声音 / 速度 / 崩溃 / 决策树） |
 
 ---
