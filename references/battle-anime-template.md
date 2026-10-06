@@ -267,7 +267,7 @@ A tense taiko-and-string cue from 00.000, one held drum hit at 01.900, an explos
 ## 12.1 网络增量（2026-10-02 调研补录，异世界/日式战斗番通用）
 
 > 来源：动画运动规律 + AI 打戏控场法（Seedance/Kling 系）+ 社区 H3 实战 prompt。
-> 完整展开见 `桌面\重要AI配置文档\06_视频与图像生成\06_异世界日漫战斗场景_制作要点与提示词库_20261002.md`。
+> 完整展开见 `references/ （见本仓库对应文档）`。
 
 ### 帧数表（24fps，控制"重量"的唯一硬指标）
 
@@ -355,7 +355,7 @@ A tense taiko-and-string cue from 00.000, one held drum hit at 01.900, an explos
 ## 13. 官方三大公式 + 四套模板（本机同款模型的写作规范）
 
 > 本机底模 = `Minimax-h3_Singularity_ref2va_v1.3_int8`，网上《MiniMax_H3_Singularity_Prompt_Writing_Specification_Enhanced》
-> 就是它的**官方提示词规范**。出处与全文：`桌面\重要AI配置文档\06_视频与图像生成\08_MinimaxH3打斗提示词模板库_官方规范与本机对照_20261002.md`
+> 就是它的**官方提示词规范**。出处与全文：`references/ （见本仓库对应文档）`
 
 ### 三条公式（所有打斗提示词的底层逻辑）
 
@@ -741,7 +741,7 @@ Image 2 defines the location: <场景清单>. Keep the location exactly as in Im
 
 > **本节优先于 §14 与 §15。** §14/§15 是在「本机后端只有最窄一条路径」前提下的绕路方案；
 > 装了 Director 后，§14.4 判定的「本机天花板 = 静帧动画」**已被推翻**。
-> 全文归档：`桌面\重要AI配置文档\06_视频与图像生成\11_MiniMaxH3Director导演台_解决静帧动画的正解_20261003.md`
+> 全文归档：`references/ （见本仓库对应文档）`
 
 ### 17.1 之前 11 段全部"静帧"的机械原因（不是提示词也不是模型）
 

@@ -104,7 +104,7 @@
 | **`references/troubleshooting.md`** | 出片不对时查这一页 |
 | **`references/agent-playbook-full.md`** | ⭐⭐ **Agent 完整作战手册**（1860 行）：12步端到端流程 + 27 条避坑 + 日式异世界战斗提示词库 |
 | **`references/battle-anime-template.md`** | ⭐⭐ 日式异世界/魔法打斗**五铁律 + 打击感词库 + 四型预设 + 镜位表** |
-| **`references/pipeline-checklist.md`** | ⭐ 端到端 pipeline 每步的验收判据 |
+| **`references/long-form-guide.md`** | ⭐ **长片实战（>2 分钟）**：15s 段帧数公式、第三人钉死不変脸、室内场景、跨片总合成、杂帧裁剪 |
 | **`references/prompt-mastery.md`** | 提示词分层写法（画风需求必须分层，否则出成写实照片） |
 | **`references/base-en.txt` / `ref-en.txt`** | 官方提示词格式权威参考（原文） |
 | **`references/train-sill-template.md`** | SillyTails/训练类项目的模板写法 |
@@ -192,7 +192,14 @@ MiniMax-H3 是目前开源视频模型里**少数能在一张消费级显卡上�
          = 13–26 个 1.2–2.0 秒快剪镜头
          = 1–2 张角色参考图
          = 原速播放（不需要后期变速）
+
+长片（已验证）= 12 段 × 15 秒（latent 接续）
+            = 约 3 分钟连续剧情（362 + 340×11 = 4102 帧）
+            = 双角色 + 第三人固定 NPC（不変脸）
+            = 室外 → 室内 → 多人场景全跑通
+            = 单张 16GB 显卡连跑约 2.5–3 小时一次通过
 ```
+详见 [`references/long-form-guide.md`](references/long-form-guide.md)。
 
 ---
 
@@ -792,6 +799,17 @@ ffmpeg -i in.mp4 -af astats=metadata=1:reset=240,ametadata=print:key=lavfi.astat
 
 > ⚠️ **优先做快剪，而不是后期加速**。先按 `shot-rhythm.md` 把分镜改碎，
 > 再考虑变速。1.5 倍速通常是在掩盖分镜问题（见 §8 复盘第 12 条）。
+
+---
+
+## 10.5 长片（> 2 分钟）的已知局限
+
+- **单段硬上限约 15 秒**：更长要靠多段接续，不是一次硬出。
+- **第三人必须钉死**：没在参考图里锁定的新角色，每段会随机长相，必须在 `base_prompt` 写死外貌 + `style_lock` 禁止其他人（见 `references/long-form-guide.md` §3）。
+- **跨段衔接要手动复述**：每段开头必须文字复述上段结尾，否则画面会凭空多角色/跳场景（见 long-form-guide.md §4）。
+- **15 秒首段头 2–3 帧是灰底杂帧**：拼接前需裁掉（见 long-form-guide.md §6.2）。
+- **连跑耗时长**：12 段约 2.5–3 小时，跑之前关掉系统休眠。
+- 以上局限均已在 RTX 5060 Ti 16GB 上实跑验证可规避，其他显卡耗时会有出入。
 
 ---
 

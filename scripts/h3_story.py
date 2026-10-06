@@ -30,7 +30,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import h3_motion_context_chain as CH          # noqa: E402
 
-FF = r"D:\APP\ffmpeg\ffmpeg-9.0.2-full_build\bin\ffmpeg.exe"
+FF = os.environ.get("FFMPEG", "ffmpeg")   # 确保 ffmpeg 在 PATH，或用 FFMPEG 环境变量指定绝对路径
 PROBE = r"<AGENT_SCRIPTS>\h3_video_probe.py"
 VP = r"<COMFYUI_ROOT>\ComfyUI\.venv\Scripts\python.exe"
 OUTDIR = r"<COMFYUI_ROOT>\ComfyUI\output\shenshen_chain"
