@@ -171,7 +171,7 @@
 | **`examples/case-01-pudding/`** | ⭐ **完整案例**：成片 + 原始参考图 + 提示词全文 + 验收流程 + 实测不足 |
 | **`references/troubleshooting.md`** | 出片不对时查这一页 |
 | **`references/agent-playbook-full.md`** | ⭐⭐ **Agent 完整作战手册**（约 1860 行）：12步端到端流程 + 27 条避坑 + 日式异世界战斗提示词库 |
-| **`references/battle-anime-template.md`** | ⭐⭐ 日式异世界/魔法打斗**五铁律 + 打击感词库 + 四型预设 + 镜位表** |
+| **`references/battle-anime-template.md`** | ⭐⭐ 日式异世界/魔法打斗**五铁律 + 打击感词库 + 四型预设 + 镜位表** ⚠️ **实测效果差，不建议使用** |
 | **`references/long-form-guide.md`** | ⭐ **长片实战（>2 分钟）**：15s 段帧数公式、第三人钉死不変脸、室内场景、跨片总合成、杂帧裁剪 |
 | **`references/prompt-mastery.md`** | 提示词分层写法（画风需求必须分层，否则出成写实照片） |
 | **`references/base-en.txt` / `ref-en.txt`** | 官方提示词格式权威参考（原文） |

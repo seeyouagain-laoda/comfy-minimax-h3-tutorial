@@ -26,7 +26,7 @@ description: 基于 Comfy 和 MiniMax H3 的实战教程（以 DeepSeek 鲸鱼�
 | **抄现成模板** | **`references/prompt-templates.md`** |
 | **出片不对** | ⭐ **`references/troubleshooting.md`**（五步排查 + 静默失效家族 + 决策树） |
 | **要 Agent 全自动跑（多段/双角色/接续链/二采）** | 🔴 **`references/agent-playbook-full.md`**（1860 行完整作战手册：12 步流程 + 27 条避坑） |
-| **写日式异世界/魔法打斗** | 🔴 **`references/battle-anime-template.md`**（五铁律 + 打击感词库 + 四型预设） |
+| **写日式异世界/魔法打斗** | 🔴 **`references/battle-anime-template.md`**（五铁律 + 打击感词库 + 四型预设）⚠️ 实测效果差，不建议使用 |
 | **要每步的验收判据** | **`references/pipeline-checklist.md`** |
 | **做 >2 分钟长片（多段/第三人/室内/总合成）** | 🔴 **`references/long-form-guide.md`** |
 | **画风总出成照片级写实** | **`references/prompt-mastery.md`**（必须分层写） |
